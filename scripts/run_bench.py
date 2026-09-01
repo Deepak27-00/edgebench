@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from edgebench.backends import BACKENDS
 from edgebench.bench.harness import benchmark
 
-MODELS = ["yolo11n"]
+MODELS = ["yolo11n", "yolo26n"]
 BACKEND_NAMES = ["onnx_cpu", "onnx_int8"]
 GRAPH_OPT_LEVELS = ["all", "basic", "disabled"]
 INPUT_SIZE = 640

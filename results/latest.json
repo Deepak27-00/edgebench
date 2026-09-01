@@ -1,0 +1,1339 @@
+{
+  "generated_at": "2026-09-01T15:28:59.950818+00:00",
+  "warmup": 10,
+  "iters": 100,
+  "runs": [
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 81.65969999999999,
+        "p90_ms": 93.44908000000001,
+        "p99_ms": 109.31904200000002,
+        "mean_ms": 84.421448,
+        "stdev_ms": 6.436805227475864,
+        "min_ms": 78.8246,
+        "max_ms": 114.0455,
+        "fps": 12.245942613063729
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.756920999032445,
+        "inference_ms": 75.41762899869354,
+        "postprocess_ms": 1.8697320006322116
+      },
+      "resources": {
+        "mean_cpu_percent": 104.95,
+        "peak_rss_mb": 169.16015625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 50.32605,
+        "p90_ms": 53.039010000000005,
+        "p99_ms": 56.708204000000016,
+        "mean_ms": 50.467554,
+        "stdev_ms": 2.029787016862169,
+        "min_ms": 47.698,
+        "max_ms": 59.6489,
+        "fps": 19.870424958843383
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.556924999458715,
+        "inference_ms": 41.67575000145007,
+        "postprocess_ms": 1.838786999869626
+      },
+      "resources": {
+        "mean_cpu_percent": 206.32178217821783,
+        "peak_rss_mb": 174.17578125
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 37.278,
+        "p90_ms": 44.370070000000005,
+        "p99_ms": 48.70391500000002,
+        "mean_ms": 38.382866,
+        "stdev_ms": 4.605794595880106,
+        "min_ms": 32.1528,
+        "max_ms": 52.7842,
+        "fps": 26.825473469606738
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 7.39953400217928,
+        "inference_ms": 28.450925998040475,
+        "postprocess_ms": 2.108509000390768
+      },
+      "resources": {
+        "mean_cpu_percent": 402.9311688311688,
+        "peak_rss_mb": 174.69921875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 39.31325,
+        "p90_ms": 49.724840000000015,
+        "p99_ms": 69.94930000000015,
+        "mean_ms": 41.916731,
+        "stdev_ms": 8.803285746761281,
+        "min_ms": 32.9062,
+        "max_ms": 99.4612,
+        "fps": 25.43671662861758
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.0996109994594,
+        "inference_ms": 28.410807001637295,
+        "postprocess_ms": 2.8067639999790117
+      },
+      "resources": {
+        "mean_cpu_percent": 1498.3698795180724,
+        "peak_rss_mb": 177.55859375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 104.99585,
+        "p90_ms": 110.22245,
+        "p99_ms": 115.89572400000003,
+        "mean_ms": 105.583965,
+        "stdev_ms": 3.5007657124996423,
+        "min_ms": 99.543,
+        "max_ms": 119.2443,
+        "fps": 9.524185955921114
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.025773999863304,
+        "inference_ms": 97.50096700125141,
+        "postprocess_ms": 1.7453829996520653
+      },
+      "resources": {
+        "mean_cpu_percent": 103.39857142857143,
+        "peak_rss_mb": 173.296875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 62.276799999999994,
+        "p90_ms": 64.91640000000001,
+        "p99_ms": 68.83752100000001,
+        "mean_ms": 62.61265,
+        "stdev_ms": 1.783533487578277,
+        "min_ms": 59.8641,
+        "max_ms": 70.5028,
+        "fps": 16.057343986845826
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.27773700049147,
+        "inference_ms": 54.28314800024964,
+        "postprocess_ms": 1.6967899980954826
+      },
+      "resources": {
+        "mean_cpu_percent": 202.0544,
+        "peak_rss_mb": 176.84375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 43.32015,
+        "p90_ms": 47.07629,
+        "p99_ms": 55.643096,
+        "mean_ms": 44.2357,
+        "stdev_ms": 2.860338374240278,
+        "min_ms": 41.0562,
+        "max_ms": 56.2763,
+        "fps": 23.08394592354828
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.735734999238048,
+        "inference_ms": 35.2065250009764,
+        "postprocess_ms": 1.8925749999471009
+      },
+      "resources": {
+        "mean_cpu_percent": 404.2386363636364,
+        "peak_rss_mb": 177.7734375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 48.188,
+        "p90_ms": 64.70619,
+        "p99_ms": 80.97007400000008,
+        "mean_ms": 50.994156,
+        "stdev_ms": 8.671790552144733,
+        "min_ms": 42.6275,
+        "max_ms": 96.8075,
+        "fps": 20.752054453390883
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.291523000632878,
+        "inference_ms": 37.4010920006549,
+        "postprocess_ms": 2.768416000471916
+      },
+      "resources": {
+        "mean_cpu_percent": 1505.39900990099,
+        "peak_rss_mb": 180.44140625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 104.5872,
+        "p90_ms": 110.27066,
+        "p99_ms": 130.835235,
+        "mean_ms": 106.129247,
+        "stdev_ms": 4.767883464219185,
+        "min_ms": 101.5768,
+        "max_ms": 132.2643,
+        "fps": 9.561399482919516
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.33739599987166,
+        "inference_ms": 97.65984100027708,
+        "postprocess_ms": 1.780282000254374
+      },
+      "resources": {
+        "mean_cpu_percent": 101.94075829383887,
+        "peak_rss_mb": 176.78515625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 62.48815,
+        "p90_ms": 67.01227,
+        "p99_ms": 69.395989,
+        "mean_ms": 63.281292,
+        "stdev_ms": 2.4028047025343553,
+        "min_ms": 60.0012,
+        "max_ms": 71.1967,
+        "fps": 16.003034175279634
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.553369999455754,
+        "inference_ms": 54.564900000113994,
+        "postprocess_ms": 1.7708569989190437
+      },
+      "resources": {
+        "mean_cpu_percent": 205.60714285714286,
+        "peak_rss_mb": 176.84765625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 43.23205,
+        "p90_ms": 46.06885,
+        "p99_ms": 51.46563100000002,
+        "mean_ms": 43.813105,
+        "stdev_ms": 2.0725513055693394,
+        "min_ms": 41.0212,
+        "max_ms": 55.7257,
+        "fps": 23.13098731149691
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.851992000883911,
+        "inference_ms": 34.70019399974262,
+        "postprocess_ms": 1.8731919993297197
+      },
+      "resources": {
+        "mean_cpu_percent": 399.8862068965517,
+        "peak_rss_mb": 178.046875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 56.2298,
+        "p90_ms": 86.69757000000001,
+        "p99_ms": 112.99782200000001,
+        "mean_ms": 61.815885,
+        "stdev_ms": 16.68502962462522,
+        "min_ms": 45.1144,
+        "max_ms": 117.9302,
+        "fps": 17.784164268768517
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 11.361576998606324,
+        "inference_ms": 46.63927500019781,
+        "postprocess_ms": 3.1308980006724596
+      },
+      "resources": {
+        "mean_cpu_percent": 1446.5295081967213,
+        "peak_rss_mb": 180.71875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "all",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 101.51205,
+        "p90_ms": 119.15186,
+        "p99_ms": 136.77861000000024,
+        "mean_ms": 104.457035,
+        "stdev_ms": 13.05922269449136,
+        "min_ms": 92.497,
+        "max_ms": 184.6362,
+        "fps": 9.851047240204489
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 7.074083999032155,
+        "inference_ms": 95.11934699839912,
+        "postprocess_ms": 1.887939000444021
+      },
+      "resources": {
+        "mean_cpu_percent": 104.88985507246377,
+        "peak_rss_mb": 162.50390625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "all",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 67.84545,
+        "p90_ms": 76.02508,
+        "p99_ms": 82.175424,
+        "mean_ms": 69.439739,
+        "stdev_ms": 4.6445483810830535,
+        "min_ms": 63.6399,
+        "max_ms": 82.455,
+        "fps": 14.739381933497382
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.948866001330316,
+        "inference_ms": 60.33383599919034,
+        "postprocess_ms": 1.7510450005647726
+      },
+      "resources": {
+        "mean_cpu_percent": 204.48333333333332,
+        "peak_rss_mb": 167.10546875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "all",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 53.05115,
+        "p90_ms": 55.228590000000004,
+        "p99_ms": 58.82206900000002,
+        "mean_ms": 53.31161,
+        "stdev_ms": 1.853393458611593,
+        "min_ms": 50.2969,
+        "max_ms": 62.0761,
+        "fps": 18.849732757913824
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.859072000661399,
+        "inference_ms": 44.36359900049865,
+        "postprocess_ms": 1.686580999812577
+      },
+      "resources": {
+        "mean_cpu_percent": 405.68301886792455,
+        "peak_rss_mb": 165.87109375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "all",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 78.16265,
+        "p90_ms": 94.89351000000002,
+        "p99_ms": 127.59279400000001,
+        "mean_ms": 82.045546,
+        "stdev_ms": 13.166731348551673,
+        "min_ms": 67.1481,
+        "max_ms": 129.4831,
+        "fps": 12.793834395328204
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.803898000740446,
+        "inference_ms": 67.90256599982968,
+        "postprocess_ms": 2.74193900055252
+      },
+      "resources": {
+        "mean_cpu_percent": 1475.8608695652174,
+        "peak_rss_mb": 169.09765625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 101.56805,
+        "p90_ms": 121.53457,
+        "p99_ms": 140.59097500000001,
+        "mean_ms": 105.019582,
+        "stdev_ms": 11.505214638284938,
+        "min_ms": 92.769,
+        "max_ms": 144.598,
+        "fps": 9.845615821116976
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.277647999231704,
+        "inference_ms": 96.63555000268389,
+        "postprocess_ms": 1.788765997334849
+      },
+      "resources": {
+        "mean_cpu_percent": 102.7866028708134,
+        "peak_rss_mb": 179.140625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 71.46879999999999,
+        "p90_ms": 77.58122,
+        "p99_ms": 85.66624100000003,
+        "mean_ms": 72.42754,
+        "stdev_ms": 4.314555319268754,
+        "min_ms": 65.4765,
+        "max_ms": 88.7591,
+        "fps": 13.992119638219757
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.974008001270704,
+        "inference_ms": 63.26119399804156,
+        "postprocess_ms": 1.791854000184685
+      },
+      "resources": {
+        "mean_cpu_percent": 206.7,
+        "peak_rss_mb": 182.26953125
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 56.64725,
+        "p90_ms": 62.38568,
+        "p99_ms": 68.884958,
+        "mean_ms": 57.506051,
+        "stdev_ms": 3.6123216470179043,
+        "min_ms": 52.7897,
+        "max_ms": 70.0094,
+        "fps": 17.653107608930707
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 7.112910998694133,
+        "inference_ms": 48.18959799944423,
+        "postprocess_ms": 1.7872120015090331
+      },
+      "resources": {
+        "mean_cpu_percent": 403.95304347826084,
+        "peak_rss_mb": 181.2890625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 83.61340000000001,
+        "p90_ms": 111.51314,
+        "p99_ms": 142.40503600000022,
+        "mean_ms": 88.993456,
+        "stdev_ms": 17.837675598055895,
+        "min_ms": 70.888,
+        "max_ms": 185.4241,
+        "fps": 11.959805485723578
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.778481001325417,
+        "inference_ms": 74.85282000008738,
+        "postprocess_ms": 2.7218379982514307
+      },
+      "resources": {
+        "mean_cpu_percent": 1470.5149425287357,
+        "peak_rss_mb": 184.96875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 96.63955,
+        "p90_ms": 101.20766,
+        "p99_ms": 107.91165800000002,
+        "mean_ms": 97.603275,
+        "stdev_ms": 3.216583113324486,
+        "min_ms": 93.0478,
+        "max_ms": 109.5311,
+        "fps": 10.347730302966022
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.222766002465505,
+        "inference_ms": 89.22715299966512,
+        "postprocess_ms": 1.7913329994189553
+      },
+      "resources": {
+        "mean_cpu_percent": 103.11288659793814,
+        "peak_rss_mb": 180.859375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 68.1172,
+        "p90_ms": 73.22239,
+        "p99_ms": 77.79103400000002,
+        "mean_ms": 68.982273,
+        "stdev_ms": 3.416732811831422,
+        "min_ms": 64.1137,
+        "max_ms": 81.2594,
+        "fps": 14.680579941630015
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 5.4765280010178685,
+        "inference_ms": 61.77998200058937,
+        "postprocess_ms": 1.4992709999205545
+      },
+      "resources": {
+        "mean_cpu_percent": 205.9897810218978,
+        "peak_rss_mb": 181.0546875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 56.540850000000006,
+        "p90_ms": 66.00212,
+        "p99_ms": 75.86815100000004,
+        "mean_ms": 58.394354,
+        "stdev_ms": 6.268404891575792,
+        "min_ms": 51.3265,
+        "max_ms": 84.4862,
+        "fps": 17.68632767282416
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.396540999994613,
+        "inference_ms": 50.00016100006178,
+        "postprocess_ms": 1.671372998971492
+      },
+      "resources": {
+        "mean_cpu_percent": 406.2818965517241,
+        "peak_rss_mb": 181.1640625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo11n",
+      "backend": "onnx_int8",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 80.319,
+        "p90_ms": 103.07247000000001,
+        "p99_ms": 123.12006900000014,
+        "mean_ms": 84.300349,
+        "stdev_ms": 14.297467461993634,
+        "min_ms": 67.5033,
+        "max_ms": 152.0052,
+        "fps": 12.450354212577347
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.380976999294944,
+        "inference_ms": 70.94666600023629,
+        "postprocess_ms": 2.5087140005780384
+      },
+      "resources": {
+        "mean_cpu_percent": 1484.3411764705882,
+        "peak_rss_mb": 184.515625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 72.13884999999999,
+        "p90_ms": 76.05736,
+        "p99_ms": 80.006185,
+        "mean_ms": 72.686302,
+        "stdev_ms": 2.613906639263123,
+        "min_ms": 69.131,
+        "max_ms": 80.9947,
+        "fps": 13.862156105898556
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.6283859993563965,
+        "inference_ms": 65.50901700218674,
+        "postprocess_ms": 0.14429699745960534
+      },
+      "resources": {
+        "mean_cpu_percent": 105.62551724137931,
+        "peak_rss_mb": 180.765625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 43.947500000000005,
+        "p90_ms": 48.23346000000001,
+        "p99_ms": 49.745009,
+        "mean_ms": 44.476427,
+        "stdev_ms": 2.1614156998239493,
+        "min_ms": 41.0645,
+        "max_ms": 50.3597,
+        "fps": 22.754422890949424
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.6315360003500246,
+        "inference_ms": 37.25756200030446,
+        "postprocess_ms": 0.1607860007788986
+      },
+      "resources": {
+        "mean_cpu_percent": 200.89438202247192,
+        "peak_rss_mb": 181.796875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 29.7225,
+        "p90_ms": 32.97034,
+        "p99_ms": 37.93827000000002,
+        "mean_ms": 30.363813,
+        "stdev_ms": 2.2130614198460714,
+        "min_ms": 27.3518,
+        "max_ms": 41.1132,
+        "fps": 33.64454537808058
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.921799998963252,
+        "inference_ms": 22.861854001239408,
+        "postprocess_ms": 0.1657640011399053
+      },
+      "resources": {
+        "mean_cpu_percent": 407.3344262295082,
+        "peak_rss_mb": 182.31640625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "all",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 41.6655,
+        "p90_ms": 58.63982000000003,
+        "p99_ms": 85.32051299999999,
+        "mean_ms": 44.973331,
+        "stdev_ms": 12.546931150359342,
+        "min_ms": 29.4492,
+        "max_ms": 85.3713,
+        "fps": 24.000672018816527
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 11.746749001031276,
+        "inference_ms": 32.371841000858694,
+        "postprocess_ms": 0.21251299796858802
+      },
+      "resources": {
+        "mean_cpu_percent": 1435.6329545454546,
+        "peak_rss_mb": 184.73828125
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 95.8731,
+        "p90_ms": 103.81846000000002,
+        "p99_ms": 114.24997600000002,
+        "mean_ms": 97.227705,
+        "stdev_ms": 5.234352980948712,
+        "min_ms": 90.9844,
+        "max_ms": 116.7028,
+        "fps": 10.430454423607873
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.687368999700993,
+        "inference_ms": 90.02240299800178,
+        "postprocess_ms": 0.15025800181319937
+      },
+      "resources": {
+        "mean_cpu_percent": 101.75699481865286,
+        "peak_rss_mb": 183.65625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 55.384550000000004,
+        "p90_ms": 61.68133,
+        "p99_ms": 71.89602500000001,
+        "mean_ms": 56.801912,
+        "stdev_ms": 4.329561626333338,
+        "min_ms": 52.1486,
+        "max_ms": 73.8191,
+        "fps": 18.055576871167137
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 5.447768997692037,
+        "inference_ms": 50.997111000760924,
+        "postprocess_ms": 0.14958699932321906
+      },
+      "resources": {
+        "mean_cpu_percent": 202.34159292035397,
+        "peak_rss_mb": 183.38671875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 37.2509,
+        "p90_ms": 39.874779999999994,
+        "p99_ms": 43.012302000000005,
+        "mean_ms": 37.754369,
+        "stdev_ms": 1.6207821504231537,
+        "min_ms": 35.3873,
+        "max_ms": 43.6164,
+        "fps": 26.844988980132023
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.210748002922628,
+        "inference_ms": 31.051989998668432,
+        "postprocess_ms": 0.14645099960034713
+      },
+      "resources": {
+        "mean_cpu_percent": 401.1186666666667,
+        "peak_rss_mb": 182.76953125
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "basic",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 49.87975,
+        "p90_ms": 84.39136000000002,
+        "p99_ms": 113.26523200000003,
+        "mean_ms": 56.439499,
+        "stdev_ms": 18.126657653204123,
+        "min_ms": 38.9133,
+        "max_ms": 118.357,
+        "fps": 20.048215959382315
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 12.218390998605173,
+        "inference_ms": 43.304373999417294,
+        "postprocess_ms": 0.2097319989115931
+      },
+      "resources": {
+        "mean_cpu_percent": 1428.8726315789474,
+        "peak_rss_mb": 182.75390625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 1,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 91.51655,
+        "p90_ms": 99.04496999999999,
+        "p99_ms": 104.903106,
+        "mean_ms": 92.978539,
+        "stdev_ms": 3.7995471880902114,
+        "min_ms": 88.933,
+        "max_ms": 106.0521,
+        "fps": 10.926985337624725
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 6.23128600185737,
+        "inference_ms": 86.25840699794935,
+        "postprocess_ms": 0.13981700176373124
+      },
+      "resources": {
+        "mean_cpu_percent": 102.40864864864865,
+        "peak_rss_mb": 182.87890625
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 2,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 62.2718,
+        "p90_ms": 80.57418,
+        "p99_ms": 95.94848900000012,
+        "mean_ms": 65.502873,
+        "stdev_ms": 11.06889060791874,
+        "min_ms": 54.1279,
+        "max_ms": 119.9549,
+        "fps": 16.05863328183865
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 7.41639899846632,
+        "inference_ms": 57.503119001339655,
+        "postprocess_ms": 0.1687290010158904
+      },
+      "resources": {
+        "mean_cpu_percent": 199.64923076923077,
+        "peak_rss_mb": 183.0234375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 4,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 42.35075,
+        "p90_ms": 50.489290000000004,
+        "p99_ms": 55.916929,
+        "mean_ms": 43.257141,
+        "stdev_ms": 5.0921217273431125,
+        "min_ms": 35.9944,
+        "max_ms": 56.1079,
+        "fps": 23.61233272138038
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 7.418108999263495,
+        "inference_ms": 35.243435001175385,
+        "postprocess_ms": 0.151563998661004
+      },
+      "resources": {
+        "mean_cpu_percent": 402.26976744186044,
+        "peak_rss_mb": 183.35546875
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    },
+    {
+      "model": "yolo26n",
+      "backend": "onnx_cpu",
+      "graph_opt_level": "disabled",
+      "intra_op_threads": 16,
+      "input_size": 640,
+      "latency": {
+        "p50_ms": 45.694599999999994,
+        "p90_ms": 53.23227,
+        "p99_ms": 68.19862000000018,
+        "mean_ms": 46.754247,
+        "stdev_ms": 7.882426976233111,
+        "min_ms": 36.3984,
+        "max_ms": 103.2961,
+        "fps": 21.884423980076424
+      },
+      "stage_breakdown": {
+        "preprocess_ms": 10.297538999293465,
+        "inference_ms": 35.80957800062606,
+        "postprocess_ms": 0.1812279995647259
+      },
+      "resources": {
+        "mean_cpu_percent": 1496.89875,
+        "peak_rss_mb": 185.6484375
+      },
+      "environment": {
+        "cpu_model": "AMD64 Family 25 Model 68 Stepping 1, AuthenticAMD",
+        "physical_cores": 8,
+        "logical_cores": 16,
+        "os": "Windows 11",
+        "python_version": "3.12.4",
+        "onnxruntime_version": "1.29.0",
+        "execution_provider": "CPUExecutionProvider"
+      },
+      "warmup": 10,
+      "iters": 100
+    }
+  ]
+}

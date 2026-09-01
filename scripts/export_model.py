@@ -1,8 +1,9 @@
-"""Export a YOLO11 model to ONNX for CPU inference with onnxruntime.
+"""Export a YOLO model to ONNX for CPU inference with onnxruntime.
 
 Dev-only: depends on ultralytics, which is not part of the runtime image.
 """
 
+import argparse
 from pathlib import Path
 
 import onnx
@@ -37,6 +38,17 @@ def print_io_shapes(onnx_path: Path) -> None:
         print(f"  output {tensor.name}: {dims}")
 
 
-if __name__ == "__main__":
-    onnx_path = export_model()
+def main() -> None:
+    """Parse CLI args and export the requested model."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--model", default=MODEL_NAME, help="Ultralytics model name, e.g. yolo11n or yolo26n"
+    )
+    args = parser.parse_args()
+
+    onnx_path = export_model(args.model)
     print_io_shapes(onnx_path)
+
+
+if __name__ == "__main__":
+    main()
