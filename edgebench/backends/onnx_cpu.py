@@ -54,14 +54,21 @@ class OnnxCpuDetector:
             "postprocess_ms": 0.0,
         }
 
+        self.model_path = model_path
+        self.graph_opt_level = graph_opt_level
+        self.intra_op_threads = intra_op_threads
+
     def warmup(self, n: int) -> None:
         """Run ``n`` throwaway inferences on a blank frame to warm up the session."""
         dummy = np.zeros((640, 640, 3), dtype=np.uint8)
         for _ in range(n):
             self.infer(dummy)
 
-    def infer(self, img: np.ndarray) -> list[Detection]:
-        """Run detection on a BGR uint8 HWC image and return the detections found."""
+    def infer(self, img: np.ndarray, *, conf_thres: float | None = None) -> list[Detection]:
+        """Run detection on a BGR uint8 HWC image and return the detections found.
+
+        ``conf_thres`` overrides the instance default for this call only, if given.
+        """
         t0 = time.perf_counter()
         blob, scale, pad_x, pad_y = letterbox(img)
         t1 = time.perf_counter()
@@ -70,7 +77,12 @@ class OnnxCpuDetector:
         t2 = time.perf_counter()
 
         detections = decode(
-            output, scale, pad_x, pad_y, conf_thres=self._conf_thres, iou_thres=self._iou_thres
+            output,
+            scale,
+            pad_x,
+            pad_y,
+            conf_thres=conf_thres if conf_thres is not None else self._conf_thres,
+            iou_thres=self._iou_thres,
         )
         t3 = time.perf_counter()
 

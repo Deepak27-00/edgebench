@@ -42,8 +42,11 @@ class Detector(Protocol):
         """Run ``n`` throwaway inferences to trigger lazy graph init and allocator warm-up."""
         ...
 
-    def infer(self, img: np.ndarray) -> list[Detection]:
-        """Run detection on a BGR uint8 HWC image and return the detections found."""
+    def infer(self, img: np.ndarray, *, conf_thres: float | None = None) -> list[Detection]:
+        """Run detection on a BGR uint8 HWC image and return the detections found.
+
+        ``conf_thres`` overrides the instance default for this call only, if given.
+        """
         ...
 
     @property

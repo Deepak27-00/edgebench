@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EdgeBench</title>
+<style>
+  :root {
+    --bg: #0a0c0f;
+    --panel: #12151a;
+    --border: #232830;
+    --text: #dfe6ec;
+    --muted: #7c8792;
+    --accent: #3ddc97;
+    --accent2: #ffb454;
+    --seg-pre: #4a90d9;
+    --seg-inf: #3ddc97;
+    --seg-post: #ffb454;
+    --danger: #e0605c;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 14px;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { font-size: 1rem; letter-spacing: 0.08em; margin: 0; }
+  header .sub { color: var(--muted); font-size: 0.8rem; }
+  nav { margin-left: auto; display: flex; gap: 0.5rem; }
+  .tab-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    font: inherit;
+  }
+  .tab-btn.active { color: var(--bg); background: var(--accent); border-color: var(--accent); }
+  main { padding: 1.5rem; max-width: 960px; margin: 0 auto; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 1rem; }
+  label { color: var(--muted); font-size: 0.8rem; }
+  select, input[type="number"] {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.5rem;
+    font: inherit;
+  }
+  #dropzone {
+    border: 1px dashed var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  #dropzone.dragover { border-color: var(--accent); color: var(--accent); }
+  canvas { max-width: 100%; display: block; margin-top: 1rem; background: #000; }
+  .timing-bar { display: flex; height: 10px; width: 100%; margin-top: 1rem; background: var(--border); }
+  .timing-bar div { height: 100%; }
+  #seg-pre { background: var(--seg-pre); width: 0%; }
+  #seg-inf { background: var(--seg-inf); width: 0%; }
+  #seg-post { background: var(--seg-post); width: 0%; }
+  #timing-label { color: var(--muted); font-size: 0.75rem; margin-top: 0.4rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: normal; }
+  .table-wrap { overflow-x: auto; }
+  h2 { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 0.75rem; }
+  .chart { width: 100%; height: auto; }
+  .axis { stroke: var(--border); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 9px; }
+  .line-latency { fill: none; stroke: var(--accent); stroke-width: 2; }
+  .line-cpu { fill: none; stroke: var(--accent2); stroke-width: 2; stroke-dasharray: 4 3; }
+  .dot-latency { fill: var(--accent); }
+  .dot-cpu { fill: var(--accent2); }
+  .seg-pre { fill: var(--seg-pre); }
+  .seg-inf { fill: var(--seg-inf); }
+  .seg-post { fill: var(--seg-post); }
+  .legend { display: flex; gap: 1rem; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
+  .legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+  .swatch { width: 10px; height: 10px; display: inline-block; }
+  #status { color: var(--danger); font-size: 0.8rem; min-height: 1em; }
+  #machine-spec { color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>EDGEBENCH</h1>
+  <span class="sub">CPU inference benchmark harness</span>
+  <nav>
+    <button class="tab-btn active" data-tab="detect-tab">detect</button>
+    <button class="tab-btn" data-tab="benchmark-tab">benchmark</button>
+  </nav>
+</header>
+
+<main>
+  <section id="detect-tab" class="tab-panel">
+    <div class="panel">
+      <div class="row">
+        <label>backend<br><select id="backend-select"></select></label>
+        <label>conf<br><input id="conf-input" type="number" min="0" max="1" step="0.05" value="0.25"></label>
+      </div>
+      <div id="dropzone">drop an image here, or click to upload</div>
+      <input id="file-input" type="file" accept="image/*" hidden>
+      <div id="status"></div>
+      <canvas id="canvas"></canvas>
+      <div class="timing-bar">
+        <div id="seg-pre"></div><div id="seg-inf"></div><div id="seg-post"></div>
+      </div>
+      <div id="timing-label">upload an image to run detection</div>
+    </div>
+    <div class="panel">
+      <h2>detections</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>class</th><th>score</th></tr></thead>
+          <tbody id="detections-list"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="benchmark-tab" class="tab-panel" hidden>
+    <div class="panel">
+      <h2>thread scaling — yolo11n / onnx_cpu / opt=all</h2>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--accent)"></span>p50 latency (ms)</span>
+        <span><span class="swatch" style="background:var(--accent2)"></span>mean CPU (%)</span>
+      </div>
+      <div id="thread-chart"></div>
+    </div>
+    <div class="panel">
+      <h2>per-stage breakdown — opt=all</h2>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--seg-pre)"></span>preprocess</span>
+        <span><span class="swatch" style="background:var(--seg-inf)"></span>inference</span>
+        <span><span class="swatch" style="background:var(--seg-post)"></span>postprocess</span>
+      </div>
+      <div id="stage-chart"></div>
+    </div>
+    <div class="panel">
+      <h2>results</h2>
+      <div id="benchmark-status" class="sub"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>model</th><th>backend</th><th>opt</th><th>threads</th>
+              <th>p50</th><th>p90</th><th>p99</th><th>fps</th><th>cpu%</th><th>rss mb</th>
+            </tr>
+          </thead>
+          <tbody id="bench-table-body"></tbody>
+        </table>
+      </div>
+      <div id="machine-spec"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const backendSelect = document.getElementById('backend-select');
+const confInput = document.getElementById('conf-input');
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('file-input');
+const canvas = document.getElementById('canvas');
+const statusEl = document.getElementById('status');
+
+async function loadBackends() {
+  const res = await fetch('/api/backends');
+  const data = await res.json();
+  backendSelect.innerHTML = data.backends.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+  backendSelect.value = data.default;
+}
+
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) runDetect(file);
+});
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (file) runDetect(file);
+});
+
+async function runDetect(file) {
+  statusEl.textContent = '';
+  const form = new FormData();
+  form.append('file', file);
+  const conf = confInput.value;
+  const params = new URLSearchParams({ backend: backendSelect.value });
+  if (conf !== '') params.set('conf', conf);
+
+  const res = await fetch(`/api/detect?${params}`, { method: 'POST', body: form });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }));
+    statusEl.textContent = `error: ${err.detail || res.statusText}`;
+    return;
+  }
+  renderDetections(file, await res.json());
+}
+
+function renderDetections(file, data) {
+  const img = new Image();
+  img.onload = () => {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    ctx.lineWidth = Math.max(2, img.width / 400);
+    ctx.font = `${Math.max(14, img.width / 60)}px ui-monospace, monospace`;
+    ctx.textBaseline = 'top';
+    data.detections.forEach(d => {
+      ctx.strokeStyle = '#3ddc97';
+      ctx.strokeRect(d.x1, d.y1, d.x2 - d.x1, d.y2 - d.y1);
+      const label = `${d.class_name} ${d.score.toFixed(2)}`;
+      const w = ctx.measureText(label).width + 8;
+      const labelY = Math.max(0, d.y1 - 18);
+      ctx.fillStyle = '#3ddc97';
+      ctx.fillRect(d.x1, labelY, w, 18);
+      ctx.fillStyle = '#0a0c0f';
+      ctx.fillText(label, d.x1 + 4, labelY + 2);
+    });
+  };
+  img.src = URL.createObjectURL(file);
+
+  const t = data.stage_timings;
+  const total = t.preprocess_ms + t.inference_ms + t.postprocess_ms;
+  document.getElementById('seg-pre').style.width = `${(t.preprocess_ms / total * 100).toFixed(1)}%`;
+  document.getElementById('seg-inf').style.width = `${(t.inference_ms / total * 100).toFixed(1)}%`;
+  document.getElementById('seg-post').style.width = `${(t.postprocess_ms / total * 100).toFixed(1)}%`;
+  document.getElementById('timing-label').textContent =
+    `pre ${t.preprocess_ms.toFixed(1)}ms  ·  inf ${t.inference_ms.toFixed(1)}ms  ·  ` +
+    `post ${t.postprocess_ms.toFixed(1)}ms  ·  backend ${data.backend}`;
+
+  document.getElementById('detections-list').innerHTML = data.detections.length
+    ? data.detections.map(d => `<tr><td>${d.class_name}</td><td>${d.score.toFixed(2)}</td></tr>`).join('')
+    : '<tr><td colspan="2">no detections</td></tr>';
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
+    btn.classList.add('active');
+    const panel = document.getElementById(btn.dataset.tab);
+    panel.hidden = false;
+    if (btn.dataset.tab === 'benchmark-tab' && !panel.dataset.loaded) {
+      panel.dataset.loaded = '1';
+      loadBenchmark();
+    }
+  });
+});
+
+function threadScalingSeries(data, model, backend, opt) {
+  return data.runs
+    .filter(r => r.model === model && r.backend === backend && r.graph_opt_level === opt)
+    .map(r => ({ threads: r.intra_op_threads, p50: r.latency.p50_ms, cpu: r.resources.mean_cpu_percent }))
+    .sort((a, b) => a.threads - b.threads);
+}
+
+function stageBreakdownRows(data, opt) {
+  return data.runs
+    .filter(r => r.graph_opt_level === opt)
+    .map(r => ({
+      label: `${r.backend}/${r.model}/t${r.intra_op_threads}`,
+      pre: r.stage_breakdown.preprocess_ms,
+      inf: r.stage_breakdown.inference_ms,
+      post: r.stage_breakdown.postprocess_ms,
+    }));
+}
+
+function drawThreadScalingChart(el, series) {
+  if (!series.length) { el.innerHTML = '<p class="sub">no data</p>'; return; }
+  const W = 640, H = 240, ml = 42, mr = 42, mt = 14, mb = 28;
+  const iw = W - ml - mr, ih = H - mt - mb;
+  const threads = series.map(p => p.threads);
+  const maxLat = Math.max(...series.map(p => p.p50)) * 1.15;
+  const maxCpu = Math.max(...series.map(p => p.cpu)) * 1.15;
+  const x = t => ml + iw * (threads.indexOf(t) / Math.max(1, threads.length - 1));
+  const yLat = v => mt + ih - (v / maxLat) * ih;
+  const yCpu = v => mt + ih - (v / maxCpu) * ih;
+  const path = (accessor) => series.map((p, i) => `${i === 0 ? 'M' : 'L'}${x(p.threads)},${accessor(p)}`).join(' ');
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" class="chart">`;
+  svg += `<line x1="${ml}" y1="${mt}" x2="${ml}" y2="${mt + ih}" class="axis"/>`;
+  svg += `<line x1="${ml}" y1="${mt + ih}" x2="${ml + iw}" y2="${mt + ih}" class="axis"/>`;
+  threads.forEach(t => svg += `<text x="${x(t)}" y="${mt + ih + 16}" text-anchor="middle" class="tick">${t}t</text>`);
+  svg += `<text x="2" y="${mt + 6}" class="tick">ms</text>`;
+  svg += `<text x="${W - 2}" y="${mt + 6}" text-anchor="end" class="tick">cpu%</text>`;
+  svg += `<path d="${path(p => yLat(p.p50))}" class="line-latency"/>`;
+  svg += `<path d="${path(p => yCpu(p.cpu))}" class="line-cpu"/>`;
+  series.forEach(p => {
+    svg += `<circle cx="${x(p.threads)}" cy="${yLat(p.p50)}" r="3" class="dot-latency"/>`;
+    svg += `<circle cx="${x(p.threads)}" cy="${yCpu(p.cpu)}" r="3" class="dot-cpu"/>`;
+  });
+  svg += `</svg>`;
+  el.innerHTML = svg;
+}
+
+function drawStageBreakdownChart(el, rows) {
+  if (!rows.length) { el.innerHTML = '<p class="sub">no data</p>'; return; }
+  const W = 640, ml = 150, mr = 16, mt = 8, barH = 16, gap = 8;
+  const H = mt + rows.length * (barH + gap);
+  const iw = W - ml - mr;
+  const maxTotal = Math.max(...rows.map(r => r.pre + r.inf + r.post));
+  const scale = iw / maxTotal;
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" class="chart">`;
+  rows.forEach((r, i) => {
+    const y = mt + i * (barH + gap);
+    let cx = ml;
+    svg += `<text x="${ml - 8}" y="${y + barH - 4}" text-anchor="end" class="tick">${r.label}</text>`;
+    for (const [val, cls] of [[r.pre, 'seg-pre'], [r.inf, 'seg-inf'], [r.post, 'seg-post']]) {
+      const w = val * scale;
+      svg += `<rect x="${cx}" y="${y}" width="${w}" height="${barH}" class="${cls}"/>`;
+      cx += w;
+    }
+  });
+  svg += `</svg>`;
+  el.innerHTML = svg;
+}
+
+function renderBenchmarkTable(data) {
+  document.getElementById('bench-table-body').innerHTML = data.runs.map(r => `<tr>
+    <td>${r.model}</td><td>${r.backend}</td><td>${r.graph_opt_level}</td><td>${r.intra_op_threads}</td>
+    <td>${r.latency.p50_ms.toFixed(2)}</td><td>${r.latency.p90_ms.toFixed(2)}</td>
+    <td>${r.latency.p99_ms.toFixed(2)}</td><td>${r.latency.fps.toFixed(1)}</td>
+    <td>${r.resources.mean_cpu_percent.toFixed(1)}</td><td>${r.resources.peak_rss_mb.toFixed(1)}</td>
+  </tr>`).join('');
+}
+
+async function loadBenchmark() {
+  const statusBox = document.getElementById('benchmark-status');
+  const res = await fetch('/api/benchmark');
+  if (!res.ok) {
+    statusBox.textContent = 'no benchmark results yet — run scripts/run_bench.py';
+    return;
+  }
+  const data = await res.json();
+  statusBox.textContent = `generated ${data.generated_at} · warmup ${data.warmup} · iters ${data.iters}`;
+  renderBenchmarkTable(data);
+
+  const models = [...new Set(data.runs.map(r => r.model))];
+  const model = models.includes('yolo11n') ? 'yolo11n' : models[0];
+  drawThreadScalingChart(document.getElementById('thread-chart'), threadScalingSeries(data, model, 'onnx_cpu', 'all'));
+  drawStageBreakdownChart(document.getElementById('stage-chart'), stageBreakdownRows(data, 'all'));
+
+  const env = data.runs[0]?.environment;
+  if (env) {
+    document.getElementById('machine-spec').textContent =
+      `${env.cpu_model} · ${env.physical_cores}c/${env.logical_cores}t · ${env.os} · ` +
+      `python ${env.python_version} · onnxruntime ${env.onnxruntime_version} · ${env.execution_provider}`;
+  }
+}
+
+loadBackends();
+</script>
+</body>
+</html>
