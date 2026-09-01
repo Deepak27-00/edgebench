@@ -1,0 +1,7 @@
+-r requirements.txt
+ultralytics
+onnx
+sympy
+pytest
+httpx
+ruff

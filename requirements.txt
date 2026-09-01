@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+onnxruntime
+numpy
+opencv-python-headless
+psutil
+python-multipart
+pydantic
