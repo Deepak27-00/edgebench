@@ -85,3 +85,9 @@ class OnnxCpuDetector:
     def stage_timings(self) -> StageTimings:
         """Per-stage timings, in milliseconds, for the most recent ``infer`` call."""
         return self._stage_timings
+
+    @property
+    def execution_provider(self) -> str:
+        """Active onnxruntime execution provider for this session."""
+        providers = self._session.get_providers()
+        return providers[0] if providers else "unknown"
