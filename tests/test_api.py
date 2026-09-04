@@ -23,6 +23,14 @@ def test_healthz(client):
     assert body["backends"]["onnx_cpu"] is True
 
 
+def test_third_party_notice_is_available(client):
+    response = client.get("/NOTICE")
+
+    assert response.status_code == 200
+    assert "Ultralytics YOLO model files" in response.text
+    assert "AGPL-3.0" in response.text
+
+
 def test_detect_round_trip(client):
     with open(SAMPLE_IMAGE, "rb") as f:
         response = client.post("/api/detect", files={"file": ("sample.jpg", f, "image/jpeg")})

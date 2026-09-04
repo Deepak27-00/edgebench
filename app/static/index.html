@@ -96,6 +96,8 @@
   .swatch { width: 10px; height: 10px; display: inline-block; }
   #status { color: var(--danger); font-size: 0.8rem; min-height: 1em; }
   #machine-spec { color: var(--muted); font-size: 0.75rem; margin-top: 0.5rem; }
+  footer { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 1.5rem; color: var(--muted); font-size: 0.72rem; }
+  footer a { color: var(--accent); }
 </style>
 </head>
 <body>
@@ -171,6 +173,12 @@
     </div>
   </section>
 </main>
+
+<footer>
+  This demo includes Ultralytics YOLO model derivatives and is distributed under AGPL-3.0.
+  Read the <a href="/NOTICE">model and licence notice</a> or get the
+  <a href="https://github.com/Deepak27-00/edgebench">complete source</a>.
+</footer>
 
 <script>
 const backendSelect = document.getElementById('backend-select');

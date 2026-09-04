@@ -225,11 +225,19 @@ pull in a multi-hundred-MB PyTorch install and AGPL-3.0-licensed code into the
 runtime image, for a job (running an already-exported ONNX graph) that doesn't need
 either.
 
-## Licensing
+## Licensing and source availability
 
-Code in this repository is MIT-licensed (see [LICENSE](LICENSE)). The exported
-model weights (`models/yolo11n.onnx`, `models/yolo11n.int8.onnx`,
-`models/yolo26n.onnx`) originate from Ultralytics' YOLO11 and YOLO26 pretrained
-weights, distributed by Ultralytics under **AGPL-3.0** (a commercial license is
-also available from Ultralytics). The runtime image contains no Ultralytics source
+This repository is distributed under the [GNU Affero General Public License v3.0](LICENSE)
+(AGPL-3.0). It includes exported model files derived from Ultralytics YOLO11 and
+YOLO26 pretrained weights: `models/yolo11n.onnx`, `models/yolo11n.int8.onnx`, and
+`models/yolo26n.onnx`. The INT8 model is a dynamically quantised derivative of
+`yolo11n.onnx`; export or quantisation does not remove the model's licence terms.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for model attribution,
+licensing links, and deployment obligations. This project is intended for public,
+open-source learning and benchmarking. A network deployment must provide the
+matching complete source under AGPL-3.0. Private, proprietary, commercial, or
+embedded use of these models may require an Ultralytics Enterprise licence.
+
+The runtime image contains no Ultralytics source
 code — only the exported ONNX graphs and onnxruntime to execute them.

@@ -14,6 +14,7 @@ from typing import Any
 import cv2
 import numpy as np
 from fastapi import FastAPI, HTTPException, Query, UploadFile
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.schemas import (
@@ -30,6 +31,7 @@ from edgebench.detector import Detector
 ROOT = Path(__file__).resolve().parent.parent
 MODELS_DIR = ROOT / "models"
 RESULTS_PATH = ROOT / "results" / "latest.json"
+NOTICE_PATH = ROOT / "THIRD_PARTY_NOTICES.md"
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 MAX_UPLOAD_BYTES = 10 * 1024 * 1024
@@ -97,6 +99,12 @@ def get_benchmark() -> dict[str, Any]:
     if not RESULTS_PATH.exists():
         raise HTTPException(status_code=404, detail="no benchmark results yet")
     return json.loads(RESULTS_PATH.read_text())
+
+
+@app.get("/NOTICE")
+def get_third_party_notices() -> FileResponse:
+    """Serve the model attribution and AGPL source-availability notice."""
+    return FileResponse(NOTICE_PATH, media_type="text/markdown; charset=utf-8")
 
 
 @app.post("/api/detect", response_model=DetectResponse)
