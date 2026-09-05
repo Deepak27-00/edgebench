@@ -21,6 +21,17 @@ def test_healthz(client):
     body = response.json()
     assert body["status"] == "ok"
     assert body["backends"]["onnx_cpu"] is True
+    assert body["backends"]["onnx_cpu_yolo26n"] is True
+
+
+def test_backends_include_yolo26n(client):
+    response = client.get("/api/backends")
+
+    assert response.status_code == 200
+    body = response.json()
+    yolo26n = next(backend for backend in body["backends"] if backend["model"] == "yolo26n")
+    assert yolo26n["name"] == "onnx_cpu_yolo26n"
+    assert yolo26n["label"] == "YOLO26n · ONNX CPU (FP32)"
 
 
 def test_third_party_notice_is_available(client):
@@ -40,6 +51,19 @@ def test_detect_round_trip(client):
     assert body["backend"] == "onnx_cpu"
     assert len(body["detections"]) > 0
     assert set(body["stage_timings"]) == {"preprocess_ms", "inference_ms", "postprocess_ms"}
+
+
+def test_yolo26n_detect_round_trip(client):
+    with open(SAMPLE_IMAGE, "rb") as f:
+        response = client.post(
+            "/api/detect?backend=onnx_cpu_yolo26n",
+            files={"file": ("sample.jpg", f, "image/jpeg")},
+        )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["backend"] == "onnx_cpu_yolo26n"
+    assert len(body["detections"]) > 0
 
 
 def test_detect_rejects_non_image_content_type(client):

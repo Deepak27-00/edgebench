@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 import cv2
 import numpy as np
@@ -38,9 +38,26 @@ MAX_UPLOAD_BYTES = 10 * 1024 * 1024
 DEFAULT_BACKEND = "onnx_cpu"
 WARMUP_ITERS = 5
 
-BACKEND_MODEL_PATHS = {
-    "onnx_cpu": MODELS_DIR / "yolo11n.onnx",
-    "onnx_int8": MODELS_DIR / "yolo11n.int8.onnx",
+
+class BackendConfig(NamedTuple):
+    """The model and runner presented to users as one selectable backend."""
+
+    factory_name: str
+    model_path: Path
+    model: str
+    label: str
+
+
+BACKEND_CONFIGS = {
+    "onnx_cpu": BackendConfig(
+        "onnx_cpu", MODELS_DIR / "yolo11n.onnx", "yolo11n", "YOLO11n · ONNX CPU (FP32)"
+    ),
+    "onnx_int8": BackendConfig(
+        "onnx_int8", MODELS_DIR / "yolo11n.int8.onnx", "yolo11n", "YOLO11n · ONNX CPU (INT8)"
+    ),
+    "onnx_cpu_yolo26n": BackendConfig(
+        "onnx_cpu", MODELS_DIR / "yolo26n.onnx", "yolo26n", "YOLO26n · ONNX CPU (FP32)"
+    ),
 }
 
 
@@ -52,11 +69,11 @@ async def lifespan(app: FastAPI):
     from eating the ~2s lazy graph-init/allocator cost as a latency outlier.
     """
     detectors: dict[str, Detector] = {}
-    for name, model_path in BACKEND_MODEL_PATHS.items():
-        if not model_path.exists():
+    for name, config in BACKEND_CONFIGS.items():
+        if not config.model_path.exists():
             continue
-        factory = BACKENDS[name]
-        detector = factory(str(model_path))
+        factory = BACKENDS[config.factory_name]
+        detector = factory(str(config.model_path))
         detector.warmup(WARMUP_ITERS)
         detectors[name] = detector
 
@@ -72,7 +89,7 @@ app = FastAPI(title="EdgeBench", lifespan=lifespan)
 def healthz() -> HealthResponse:
     """Liveness check: overall status plus per-backend readiness."""
     detectors: dict[str, Detector] = app.state.detectors
-    ready = {name: name in detectors for name in BACKEND_MODEL_PATHS}
+    ready = {name: name in detectors for name in BACKEND_CONFIGS}
     status = "ok" if detectors else "degraded"
     return HealthResponse(status=status, backends=ready)
 
@@ -80,16 +97,20 @@ def healthz() -> HealthResponse:
 @app.get("/api/backends", response_model=BackendsResponse)
 def get_backends() -> BackendsResponse:
     """List the backends loaded at startup and their configuration."""
-    backends = [
-        BackendInfo(
-            name=name,
-            model_path=str(detector.model_path),
-            graph_opt_level=detector.graph_opt_level,
-            intra_op_threads=detector.intra_op_threads,
-            execution_provider=detector.execution_provider,
+    backends = []
+    for name, detector in app.state.detectors.items():
+        config = BACKEND_CONFIGS[name]
+        backends.append(
+            BackendInfo(
+                name=name,
+                model=config.model,
+                label=config.label,
+                model_path=str(detector.model_path),
+                graph_opt_level=detector.graph_opt_level,
+                intra_op_threads=detector.intra_op_threads,
+                execution_provider=detector.execution_provider,
+            )
         )
-        for name, detector in app.state.detectors.items()
-    ]
     return BackendsResponse(backends=backends, default=DEFAULT_BACKEND)
 
 

@@ -31,3 +31,30 @@ jobs:
 
       - name: Benchmark smoke test
         run: python scripts/run_bench.py --iters 5 --warmup 2
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Build runtime image
+        run: docker build --tag edgebench:ci .
+
+      - name: Start container
+        run: docker run --detach --name edgebench-ci -p 7860:7860 edgebench:ci
+
+      - name: Wait for healthy container
+        run: |
+          timeout 120 bash -c 'until [ "$(docker inspect --format="{{.State.Health.Status}}" edgebench-ci)" = "healthy" ]; do sleep 2; done'
+          curl --fail --silent --show-error http://localhost:7860/healthz
+          curl --fail --silent --show-error http://localhost:7860/NOTICE
+
+      - name: Show container logs on failure
+        if: failure()
+        run: docker logs edgebench-ci
+
+      - name: Remove container
+        if: always()
+        run: docker rm --force edgebench-ci

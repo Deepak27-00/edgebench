@@ -167,11 +167,11 @@ CPUExecutionProvider
   registry support a PyTorch reference backend for local A/B comparison, but no
   reference implementation was written — it wasn't part of what got measured, so
   it isn't claimed as a backend in the results.
-- **Docker build was not verified in this environment** (no local Docker
-  installation available while building this). The Dockerfile follows Hugging
-  Face Spaces' documented UID-1000 requirement; verify with
-  `docker build -t edgebench . && docker run --rm -p 7860:7860 edgebench` before
-  deploying.
+- **Docker deployment is locally verified, not publicly deployed.** The image
+  starts successfully with `docker run --rm -p 7860:7860 edgebench:local` and
+  serves the web app and `/healthz`. A production host still needs appropriate
+  CPU/RAM, request limits, and a public source link that matches the deployed
+  AGPL-3.0 version.
 - **Not yet deployed.** No live demo URL exists yet — see [Run it](#run-it).
 
 ## Run it
@@ -183,12 +183,18 @@ python scripts/export_model.py            # writes models/yolo11n.onnx (once)
 uvicorn app.main:app --reload --port 8000
 
 # docker
-docker build -t edgebench .
-docker run --rm -p 7860:7860 edgebench
+docker build -t edgebench:local .
+docker run --rm --name edgebench-local -p 7860:7860 edgebench:local
+# Verify in another terminal: http://localhost:7860/healthz
+# Inspect the container health: docker inspect --format='{{.State.Health.Status}}' edgebench-local
 
 # benchmark
 python scripts/run_bench.py               # writes results/<timestamp>.json + results/latest.json
 ```
+
+Runtime dependencies in `requirements.txt` are pinned to the versions verified
+in the local Docker image. Rebuild the image after changing these dependencies
+and confirm `/healthz` reports `healthy` before deployment.
 
 ## Architecture
 

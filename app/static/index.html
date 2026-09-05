@@ -191,7 +191,7 @@ const statusEl = document.getElementById('status');
 async function loadBackends() {
   const res = await fetch('/api/backends');
   const data = await res.json();
-  backendSelect.innerHTML = data.backends.map(b => `<option value="${b.name}">${b.name}</option>`).join('');
+  backendSelect.innerHTML = data.backends.map(b => `<option value="${b.name}">${b.label}</option>`).join('');
   backendSelect.value = data.default;
 }
 

@@ -37,6 +37,8 @@ class BackendInfo(BaseModel):
     """One backend's configuration, as loaded at startup."""
 
     name: str
+    model: str
+    label: str
     model_path: str
     graph_opt_level: str
     intra_op_threads: int | None
